@@ -1,0 +1,21 @@
+# Python virtual environment
+BackEnd/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment variables / secrets
+.env
+.env.*
+
+# Node modules
+FrontEnd/node_modules/
+
+# Vite build output
+FrontEnd/dist/
+
+# Logs
+*.log
+# Uploaded lecture files
+Data/uploads/

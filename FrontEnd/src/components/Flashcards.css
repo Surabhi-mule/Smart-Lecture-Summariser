@@ -1,0 +1,686 @@
+/* =================================
+   FLASHCARDS
+================================= */
+
+.flashcard-study {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+
+/* =================================
+   TOP INFO
+================================= */
+
+.flashcard-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 12px;
+}
+
+.card-counter {
+  color: #8b93a7;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  letter-spacing: 1px;
+}
+
+.review-counter {
+  color: #6f7890;
+
+  font-size: 0.8rem;
+}
+
+
+/* =================================
+   PROGRESS BAR
+================================= */
+
+.flashcard-progress {
+  width: 100%;
+  height: 6px;
+
+  margin-bottom: 22px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.flashcard-progress-fill {
+  height: 100%;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #6366f1,
+      #8b5cf6,
+      #60a5fa
+    );
+
+  box-shadow:
+    0 0 15px rgba(99, 102, 241, 0.4);
+
+  transition: width 0.4s ease;
+}
+
+
+/* =================================
+   INTERACTIVE CARD
+================================= */
+
+.interactive-flashcard {
+  position: relative;
+
+  min-height: 320px;
+
+  padding: 45px 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  cursor: pointer;
+  user-select: none;
+
+  overflow: hidden;
+
+  border-radius: 25px;
+
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(129, 140, 248, 0.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 90% 90%,
+      rgba(168, 85, 247, 0.08),
+      transparent 40%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  border: 1px solid rgba(129, 140, 248, 0.2);
+
+  backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.35),
+    inset 0 1px rgba(255, 255, 255, 0.07),
+    0 0 50px rgba(99, 102, 241, 0.06);
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.interactive-flashcard::before {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  top: -90px;
+  right: -70px;
+
+  border-radius: 50%;
+
+  background: rgba(129, 140, 248, 0.08);
+
+  filter: blur(20px);
+
+  pointer-events: none;
+}
+
+.interactive-flashcard:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(129, 140, 248, 0.45);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(99, 102, 241, 0.12),
+    inset 0 1px rgba(255, 255, 255, 0.08);
+}
+
+
+/* =================================
+   ANSWER STATE
+================================= */
+
+.interactive-flashcard.show-answer {
+  background:
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(34, 197, 94, 0.12),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      rgba(99, 102, 241, 0.08),
+      transparent 40%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  border-color: rgba(74, 222, 128, 0.25);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.35),
+    0 0 45px rgba(34, 197, 94, 0.06);
+}
+
+.interactive-flashcard.show-answer:hover {
+  border-color: rgba(74, 222, 128, 0.4);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.4),
+    0 0 55px rgba(34, 197, 94, 0.1);
+}
+
+
+/* =================================
+   CARD CONTENT
+================================= */
+
+.card-content {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+
+  animation: flashcardFade 0.3s ease;
+}
+
+.card-label {
+  display: inline-block;
+
+  margin-bottom: 25px;
+
+  padding: 7px 14px;
+
+  border-radius: 999px;
+
+  color: #a5b4fc;
+
+  background: rgba(99, 102, 241, 0.12);
+
+  border: 1px solid rgba(129, 140, 248, 0.22);
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.answer-label {
+  color: #86efac;
+
+  background: rgba(34, 197, 94, 0.1);
+
+  border-color: rgba(74, 222, 128, 0.2);
+}
+
+
+/* QUESTION */
+
+.card-content h3 {
+  max-width: 570px;
+
+  margin: 0 auto 30px;
+
+  color: #f1f5f9;
+
+  font-size: 1.5rem;
+
+  font-weight: 700;
+
+  line-height: 1.5;
+}
+
+
+/* ANSWER */
+
+.card-answer {
+  max-width: 550px;
+
+  margin: 0 auto 30px;
+
+  color: #d1d5db;
+
+  font-size: 1.05rem;
+
+  line-height: 1.75;
+}
+
+
+/* =================================
+   CLICK HINT
+================================= */
+
+.flip-hint {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 7px;
+
+  color: #6f7890;
+
+  font-size: 0.78rem;
+}
+
+.flip-hint span:first-child {
+  opacity: 0.8;
+}
+
+
+/* =================================
+   RATING
+================================= */
+
+.flashcard-rating {
+  margin-top: 22px;
+
+  text-align: center;
+}
+
+.flashcard-rating p {
+  margin-bottom: 14px;
+
+  color: #8b93a7;
+
+  font-size: 0.85rem;
+}
+
+.rating-buttons {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 10px;
+}
+
+.rating-button {
+  min-width: 105px;
+
+  padding: 11px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  border-radius: 12px;
+
+  color: #c5cada;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.rating-button:hover {
+  transform: translateY(-3px);
+}
+
+
+/* HARD */
+
+.rating-button.hard:hover {
+  background: rgba(239, 68, 68, 0.1);
+
+  border-color: rgba(248, 113, 113, 0.3);
+
+  box-shadow:
+    0 8px 25px rgba(239, 68, 68, 0.08);
+}
+
+
+/* GOOD */
+
+.rating-button.good:hover {
+  background: rgba(234, 179, 8, 0.1);
+
+  border-color: rgba(250, 204, 21, 0.3);
+
+  box-shadow:
+    0 8px 25px rgba(234, 179, 8, 0.08);
+}
+
+
+/* EASY */
+
+.rating-button.easy:hover {
+  background: rgba(34, 197, 94, 0.1);
+
+  border-color: rgba(74, 222, 128, 0.3);
+
+  box-shadow:
+    0 8px 25px rgba(34, 197, 94, 0.08);
+}
+
+
+/* =================================
+   NAVIGATION
+================================= */
+
+.flashcard-controls {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-top: 22px;
+}
+
+.card-nav-button {
+  flex: 1;
+
+  padding: 13px 20px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: #c5cada;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.card-nav-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  background: rgba(129, 140, 248, 0.1);
+
+  border-color: rgba(129, 140, 248, 0.3);
+
+  color: white;
+}
+
+.card-nav-button.next {
+  border: none;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6366f1,
+      #8b5cf6
+    );
+
+  box-shadow:
+    0 8px 25px rgba(99, 102, 241, 0.25);
+}
+
+.card-nav-button.next:hover:not(:disabled) {
+  box-shadow:
+    0 12px 35px rgba(99, 102, 241, 0.4);
+}
+
+.card-nav-button:disabled {
+  opacity: 0.3;
+
+  cursor: not-allowed;
+}
+
+
+/* =================================
+   COMPLETION SCREEN
+================================= */
+
+.flashcard-complete {
+  padding: 35px 20px;
+
+  text-align: center;
+
+  animation: flashcardFade 0.4s ease;
+}
+
+.completion-icon {
+  margin-bottom: 10px;
+
+  font-size: 3.5rem;
+
+  animation: floating 3s ease-in-out infinite;
+}
+
+.flashcard-complete h3 {
+  margin-bottom: 8px;
+
+  color: #f1f5f9;
+
+  font-size: 1.7rem;
+}
+
+.completion-message {
+  margin-bottom: 25px;
+
+  color: #8b93a7;
+}
+
+
+/* =================================
+   RATING SUMMARY
+================================= */
+
+.rating-summary {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  margin: 25px auto 30px;
+}
+
+.rating-stat {
+  min-width: 100px;
+
+  padding: 16px 18px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 4px;
+
+  border-radius: 15px;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.rating-stat span {
+  font-size: 1.4rem;
+}
+
+.rating-stat strong {
+  color: #f1f5f9;
+
+  font-size: 1.3rem;
+}
+
+.rating-stat small {
+  color: #7f879a;
+
+  font-size: 0.75rem;
+}
+
+
+/* =================================
+   REVIEW AGAIN
+================================= */
+
+.review-again-button {
+  padding: 13px 25px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6366f1,
+      #8b5cf6
+    );
+
+  box-shadow:
+    0 10px 30px rgba(99, 102, 241, 0.3);
+
+  cursor: pointer;
+
+  font-weight: 700;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.review-again-button:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 40px rgba(99, 102, 241, 0.45);
+}
+
+
+/* =================================
+   EMPTY STATE
+================================= */
+
+.flashcards-empty {
+  padding: 30px;
+
+  text-align: center;
+
+  color: #8b93a7;
+}
+
+
+/* =================================
+   ANIMATION
+================================= */
+
+@keyframes flashcardFade {
+
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width: 600px) {
+
+  .flashcard-top {
+    align-items: flex-start;
+  }
+
+  .interactive-flashcard {
+    min-height: 280px;
+
+    padding: 30px 20px;
+  }
+
+  .card-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .card-answer {
+    font-size: 1rem;
+  }
+
+  .rating-buttons {
+    gap: 7px;
+  }
+
+  .rating-button {
+    min-width: 0;
+
+    flex: 1;
+
+    padding: 10px 8px;
+  }
+
+  .rating-button span {
+    display: none;
+  }
+
+  .rating-summary {
+    gap: 7px;
+  }
+
+  .rating-stat {
+    min-width: 0;
+
+    flex: 1;
+
+    padding: 14px 8px;
+  }
+
+  .flashcard-controls {
+    flex-direction: column;
+  }
+
+}
