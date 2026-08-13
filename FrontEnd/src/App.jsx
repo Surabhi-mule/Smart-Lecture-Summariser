@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import "./App.css";
 
 import Flashcards from "./components/Flashcards";
 import Quiz from "./components/Quiz";
 import LectureCard from "./components/LectureCard";
+import Workspace from "./workspace/Workspace";
 
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -65,7 +65,7 @@ function App() {
   setIsProcessing(false);
   setUploadStatus("Lecture processed successfully!");
   setResult(data);
-  setActiveTab("lecture");
+  setActiveTab("workspace");
 
         const newLecture = {
           id: Date.now(),
@@ -312,6 +312,17 @@ function App() {
               </div>
             </>
           )}
+
+          {activeTab === "workspace" && result && (
+  <Workspace
+    lecture={result}
+    onBack={() => {
+      setActiveTab("lectures");
+      setResult(null);
+    }}
+    onNewLecture={handleNewLecture}
+  />
+)}
 
           {activeTab === "lecture" && result && (
             <div className="results">

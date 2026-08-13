@@ -1,0 +1,3005 @@
+/* ============================================================
+   SMART LECTURE AI
+   WORKSPACE
+   ============================================================ */
+
+.workspace {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(99, 102, 241, 0.18),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 25%,
+      rgba(168, 85, 247, 0.15),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(59, 130, 246, 0.12),
+      transparent 40%
+    ),
+    #070b16;
+
+  color: #f1f5f9;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  z-index: 1000;
+}
+
+
+/* ============================================================
+   GLOBAL WORKSPACE RESET
+   ============================================================ */
+
+.workspace *,
+.workspace *::before,
+.workspace *::after {
+  box-sizing: border-box;
+}
+
+.workspace h1,
+.workspace h2,
+.workspace h3,
+.workspace p,
+.workspace ul {
+  font-family: inherit;
+}
+
+.workspace button,
+.workspace textarea {
+  font-family: inherit;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.workspace .workspace-header {
+  width: 100%;
+
+  height: 74px;
+  min-height: 74px;
+
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 22px;
+
+  background:
+    rgba(7, 11, 22, 0.82);
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.07);
+
+  position: relative;
+
+  z-index: 10;
+
+  backdrop-filter: blur(18px);
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   BRAND
+   ============================================================ */
+
+.workspace .workspace-brand {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff,
+      #a5b4fc
+    );
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.workspace .brand-icon {
+  font-size: 23px;
+
+  -webkit-text-fill-color: initial;
+}
+
+
+/* ============================================================
+   CURRENT LECTURE
+   ============================================================ */
+
+.workspace .workspace-lecture {
+  flex: 1;
+
+  min-width: 0;
+
+  text-align: center;
+
+  color: #9ca3af;
+
+  font-size: 14px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   HEADER ACTIONS
+   ============================================================ */
+
+.workspace .workspace-actions {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+.workspace .workspace-actions button {
+  padding: 9px 14px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  color: #c5cada;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.workspace .workspace-actions button:hover {
+  background:
+    rgba(129, 140, 248, 0.12);
+
+  border-color:
+    rgba(129, 140, 248, 0.3);
+
+  color: #ffffff;
+
+  transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   MAIN GRID
+   ============================================================ */
+
+.workspace .workspace-grid {
+  width: 100%;
+
+  flex: 1;
+
+  min-height: 0;
+
+  height: calc(100vh - 74px);
+
+  display: grid;
+
+  grid-template-columns:
+    280px
+    minmax(0, 1fr)
+    330px;
+
+  gap: 1px;
+
+  overflow: hidden;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+}
+
+
+/* ============================================================
+   PANELS
+   ============================================================ */
+
+.workspace .sources-panel,
+.workspace .chat-panel,
+.workspace .studio-panel {
+  min-width: 0;
+
+  min-height: 0;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.065),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  border-right:
+    1px solid rgba(255, 255, 255, 0.055);
+
+  backdrop-filter: blur(18px);
+}
+
+
+/* ============================================================
+   SOURCES
+   ============================================================ */
+
+.workspace .sources-panel {
+  height: 100%;
+
+  padding: 22px 17px;
+
+  overflow-x: hidden;
+
+  overflow-y: auto;
+}
+
+
+/* ============================================================
+   STUDIO
+   ============================================================ */
+
+.workspace .studio-panel {
+  height: 100%;
+
+  padding: 22px 17px;
+
+  overflow-x: hidden;
+
+  overflow-y: auto;
+
+  scrollbar-gutter: stable;
+}
+
+
+/* ============================================================
+   PANEL HEADING
+   ============================================================ */
+
+.workspace .panel-heading {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.workspace .panel-heading > div {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.workspace .panel-icon {
+  flex-shrink: 0;
+
+  font-size: 20px;
+}
+
+.workspace .panel-heading h2 {
+  margin: 0;
+
+  color: #f1f5f9;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.workspace .panel-subtitle {
+  margin: 7px 0 18px;
+
+  color: #8b93a7;
+
+  font-size: 12px;
+
+  line-height: 1.55;
+}
+
+
+/* ============================================================
+   ADD SOURCE
+   ============================================================ */
+
+.workspace .add-source-button {
+  width: 31px;
+  height: 31px;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 9px;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  color: #c5cada;
+
+  font-size: 19px;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.workspace .add-source-button:hover {
+  background:
+    rgba(129, 140, 248, 0.12);
+
+  border-color:
+    rgba(129, 140, 248, 0.3);
+
+  color: #ffffff;
+}
+
+
+/* ============================================================
+   SOURCES
+   ============================================================ */
+
+.workspace .source-list {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.workspace .source-item {
+  width: 100%;
+
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 12px;
+
+  border:
+    1px solid transparent;
+
+  border-radius: 12px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #c5cada;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.workspace .source-item:hover {
+  background:
+    rgba(129, 140, 248, 0.07);
+
+  border-color:
+    rgba(129, 140, 248, 0.18);
+}
+
+.workspace .active-source {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(99, 102, 241, 0.14),
+      rgba(168, 85, 247, 0.07)
+    );
+
+  border-color:
+    rgba(129, 140, 248, 0.22);
+
+  box-shadow:
+    0 8px 25px rgba(99, 102, 241, 0.08);
+}
+
+.workspace .source-file-icon {
+  flex-shrink: 0;
+
+  font-size: 21px;
+}
+
+.workspace .source-item div {
+  min-width: 0;
+}
+
+.workspace .source-item p {
+  margin: 0;
+
+  color: #e5e7eb;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.workspace .source-item span {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #6f7890;
+
+  font-size: 10px;
+}
+
+
+/* ============================================================
+   EMPTY SOURCES
+   ============================================================ */
+
+.workspace .sources-empty {
+  margin-top: 19px;
+
+  padding: 17px 9px;
+
+  border:
+    1px dashed rgba(255, 255, 255, 0.1);
+
+  border-radius: 12px;
+
+  text-align: center;
+
+  color: #6f7890;
+
+  background:
+    rgba(255, 255, 255, 0.018);
+}
+
+.workspace .sources-empty span {
+  font-size: 20px;
+}
+
+.workspace .sources-empty p {
+  margin: 5px 0 0;
+
+  font-size: 10px;
+}
+
+
+/* ============================================================
+   CHAT PANEL
+   ============================================================ */
+
+.workspace .chat-panel {
+  height: 100%;
+
+  min-height: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018)
+    );
+}
+
+
+/* ============================================================
+   CHAT HEADER
+   ============================================================ */
+
+.workspace .chat-header {
+  width: 100%;
+
+  height: 66px;
+  min-height: 66px;
+
+  padding: 0 23px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  background:
+    rgba(7, 11, 22, 0.35);
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.055);
+
+  flex-shrink: 0;
+
+  backdrop-filter: blur(12px);
+}
+
+.workspace .chat-header > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.workspace .chat-header h2 {
+  margin: 0;
+
+  color: #f1f5f9;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.workspace .chat-status {
+  flex-shrink: 0;
+
+  padding: 5px 10px;
+
+  border:
+    1px solid rgba(129, 140, 248, 0.2);
+
+  border-radius: 999px;
+
+  background:
+    rgba(99, 102, 241, 0.08);
+
+  color: #a5b4fc;
+
+  font-size: 10px;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   CHAT CONTENT
+   ============================================================ */
+
+.workspace .chat-content {
+  width: 100%;
+
+  flex: 1;
+
+  min-height: 0;
+
+  padding: 30px;
+
+  overflow-x: hidden;
+
+  overflow-y: auto;
+
+  scroll-behavior: smooth;
+}
+
+
+/* ============================================================
+   CHAT WELCOME
+   ============================================================ */
+
+.workspace .chat-welcome {
+  width: 100%;
+
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  padding-bottom: 30px;
+}
+
+.workspace .chat-welcome-icon {
+  width: 52px;
+  height: 52px;
+
+  margin-bottom: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(129, 140, 248, 0.2),
+      rgba(192, 132, 252, 0.15)
+    );
+
+  border:
+    1px solid rgba(129, 140, 248, 0.25);
+
+  box-shadow:
+    0 0 35px rgba(129, 140, 248, 0.12);
+
+  font-size: 24px;
+}
+
+
+/* IMPORTANT:
+   Isolates this heading from App.css
+*/
+
+.workspace .chat-welcome h1.workspace-chat-title {
+  all: unset;
+
+  display: block;
+
+  margin: 0 0 10px;
+
+  color: #f1f5f9;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  font-size: 30px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.8px;
+
+  text-align: left;
+}
+
+.workspace .chat-welcome-description {
+  margin: 0;
+
+  color: #9ca3af;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+
+/* ============================================================
+   SUMMARY
+   ============================================================ */
+
+.workspace .summary-message {
+  width: 100%;
+
+  margin-top: 28px;
+
+  padding: 22px;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(99, 102, 241, 0.09),
+      rgba(168, 85, 247, 0.045)
+    );
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.workspace .summary-label {
+  margin-bottom: 11px;
+
+  color: #a5b4fc;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.workspace .summary-message p {
+  margin: 0;
+
+  color: #b5bccb;
+
+  font-size: 14px;
+
+  line-height: 1.85;
+}
+
+
+/* ============================================================
+   CHAT MESSAGES
+   ============================================================ */
+
+.workspace .chat-message {
+  width: 100%;
+
+  max-width: 900px;
+
+  margin: 0 auto 20px;
+}
+
+.workspace .user-bubble {
+  width: fit-content;
+
+  max-width: 75%;
+
+  margin-left: auto;
+
+  padding: 11px 15px;
+
+  border-radius:
+    14px 14px 5px 14px;
+
+  background:
+    rgba(99, 102, 241, 0.14);
+
+  border:
+    1px solid rgba(129, 140, 248, 0.18);
+
+  color: #d7dcff;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  overflow-wrap: anywhere;
+}
+
+.workspace .ai-message {
+  width: 100%;
+
+  padding: 19px;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.065),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.18);
+}
+
+.workspace .ai-message-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 10px;
+
+  color: #a5b4fc;
+
+  font-size: 12px;
+}
+
+.workspace .ai-answer {
+  margin: 0;
+
+  color: #c5cada;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+
+  white-space: pre-wrap;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* ============================================================
+   SOURCE LINKS
+   ============================================================ */
+
+.workspace .answer-sources {
+  margin-top: 17px;
+
+  padding-top: 14px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.07);
+}
+
+.workspace .sources-title {
+  margin-bottom: 8px;
+
+  color: #8b93a7;
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+.workspace .source-links {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+.workspace .source-link {
+  padding: 7px 10px;
+
+  border:
+    1px solid rgba(129, 140, 248, 0.2);
+
+  border-radius: 8px;
+
+  background:
+    rgba(99, 102, 241, 0.08);
+
+  color: #a5b4fc;
+
+  font-size: 10px;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.workspace .source-link:hover {
+  background:
+    rgba(99, 102, 241, 0.15);
+
+  border-color:
+    rgba(129, 140, 248, 0.35);
+
+  color: #ffffff;
+}
+
+
+/* ============================================================
+   ERROR
+   ============================================================ */
+
+.workspace .error-message,
+.workspace .studio-error {
+  padding: 12px;
+
+  border-radius: 10px;
+
+  background:
+    rgba(239, 68, 68, 0.08);
+
+  border:
+    1px solid rgba(239, 68, 68, 0.18);
+
+  color: #fca5a5;
+
+  font-size: 12px;
+}
+
+.workspace .studio-error {
+  margin-bottom: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   CHAT INPUT
+   ============================================================ */
+
+.workspace .chat-input-area {
+  width: calc(100% - 40px);
+
+  flex-shrink: 0;
+
+  min-height: 58px;
+
+  margin: 0 20px;
+
+  padding: 8px 11px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  gap: 9px;
+
+  border-radius: 14px;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  transition: 0.25s ease;
+}
+
+.workspace .chat-input-area:focus-within {
+  border-color:
+    rgba(129, 140, 248, 0.4);
+
+  box-shadow:
+    0 0 30px rgba(99, 102, 241, 0.08);
+}
+
+.workspace .chat-input-area textarea {
+  flex: 1;
+
+  min-width: 0;
+
+  max-height: 120px;
+
+  resize: none;
+
+  padding: 6px;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #f1f5f9;
+
+  font-size: 13px;
+
+  line-height: 1.55;
+}
+
+.workspace .chat-input-area textarea::placeholder {
+  color: #6f7890;
+}
+
+.workspace .send-button {
+  width: 37px;
+  height: 37px;
+
+  flex-shrink: 0;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6366f1,
+      #8b5cf6
+    );
+
+  color: #ffffff;
+
+  font-size: 19px;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.workspace .send-button:hover {
+  transform: translateY(-2px);
+}
+
+.workspace .send-button:disabled {
+  opacity: 0.35;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+.workspace .chat-disclaimer {
+  flex-shrink: 0;
+
+  margin: 7px 0 10px;
+
+  text-align: center;
+
+  color: #6f7890;
+
+  font-size: 9px;
+}
+
+
+/* ============================================================
+   STUDIO CARDS
+   ============================================================ */
+
+.workspace .studio-card {
+  width: 100%;
+
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 11px;
+
+  padding: 14px;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.065),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.15);
+
+  transition: 0.25s ease;
+}
+
+.workspace .studio-card:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(129, 140, 248, 0.25);
+}
+
+.workspace .studio-card.generated {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(99, 102, 241, 0.09),
+      rgba(168, 85, 247, 0.045)
+    );
+}
+
+.workspace .studio-card.generating {
+  border-color:
+    rgba(129, 140, 248, 0.45);
+
+  box-shadow:
+    0 0 30px rgba(99, 102, 241, 0.12);
+}
+
+.workspace .studio-card-icon {
+  width: 39px;
+  height: 39px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(129, 140, 248, 0.18),
+      rgba(192, 132, 252, 0.12)
+    );
+
+  border:
+    1px solid rgba(129, 140, 248, 0.18);
+
+  font-size: 18px;
+}
+
+.workspace .studio-card-content {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.workspace .studio-card-content h3 {
+  margin: 0;
+
+  color: #f1f5f9;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.workspace .studio-card-content p {
+  margin: 4px 0 0;
+
+  color: #7f879b;
+
+  font-size: 10px;
+
+  line-height: 1.45;
+}
+
+.workspace .studio-card button {
+  flex-shrink: 0;
+
+  padding: 7px 10px;
+
+  border:
+    1px solid rgba(129, 140, 248, 0.2);
+
+  border-radius: 8px;
+
+  background:
+    rgba(99, 102, 241, 0.07);
+
+  color: #a5b4fc;
+
+  font-size: 10px;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.workspace .studio-card button:hover:not(:disabled) {
+  background:
+    linear-gradient(
+      135deg,
+      #6366f1,
+      #8b5cf6
+    );
+
+  border-color: transparent;
+
+  color: #ffffff;
+}
+
+.workspace .studio-card button:disabled {
+  opacity: 0.5;
+
+  cursor: wait;
+}
+
+.workspace .studio-ready {
+  color: #86efac;
+
+  font-size: 18px;
+}
+
+
+/* ============================================================
+   GENERATED CONTENT
+   ============================================================ */
+
+.workspace .studio-result-card {
+  padding: 22px;
+}
+
+.workspace .generated-badge {
+  margin-left: auto;
+
+  padding: 4px 8px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(74, 222, 128, 0.08);
+
+  border:
+    1px solid rgba(74, 222, 128, 0.18);
+
+  color: #86efac;
+
+  font-size: 9px;
+}
+
+.workspace .generated-content {
+  width: 100%;
+}
+
+.workspace .generated-title {
+  margin-bottom: 18px;
+
+  color: #f1f5f9;
+
+  font-size: 18px;
+
+  font-weight: 800;
+}
+
+
+/* ============================================================
+   NOTES
+   ============================================================ */
+
+.workspace .notes-section {
+  margin-bottom: 20px;
+
+  padding: 16px;
+
+  border-radius: 13px;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+.workspace .notes-section h3 {
+  margin: 0 0 10px;
+
+  color: #a5b4fc;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+.workspace .notes-section ul {
+  margin: 0;
+
+  padding-left: 20px;
+}
+
+.workspace .notes-section li {
+  margin-bottom: 7px;
+
+  color: #c5cada;
+
+  font-size: 13px;
+
+  line-height: 1.65;
+}
+
+
+/* ============================================================
+   GENERATED GRID
+   ============================================================ */
+
+.workspace .generated-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+/* ============================================================
+   FLASHCARD GRID
+   ============================================================ */
+
+.workspace .flashcard-grid {
+  perspective: 1200px;
+}
+
+
+/* ============================================================
+   FLASHCARD HINT
+   ============================================================ */
+
+.workspace .flashcard-hint {
+  margin: -8px 0 16px;
+
+  color: #7f879b;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   FLASHCARD WRAPPER
+   ============================================================ */
+
+.workspace .flashcard-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 210px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  perspective: 1200px;
+
+  color: inherit;
+
+  outline: none;
+}
+
+
+/* ============================================================
+   FLASHCARD INNER
+   ============================================================ */
+
+.workspace .flashcard-inner {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 210px;
+
+  transform-style: preserve-3d;
+
+  transition:
+    transform 0.65s
+    cubic-bezier(
+      0.4,
+      0.2,
+      0.2,
+      1
+    );
+}
+
+
+/* FLIP */
+
+.workspace .flashcard-wrapper.is-flipped
+.flashcard-inner {
+  transform:
+    rotateY(180deg);
+}
+
+
+/* ============================================================
+   FLASHCARD FACE
+   ============================================================ */
+
+.workspace .flashcard-face {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  min-height: 210px;
+
+  padding: 18px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.065),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.18);
+
+  backface-visibility: hidden;
+
+  -webkit-backface-visibility: hidden;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* ============================================================
+   FLASHCARD FRONT
+   ============================================================ */
+
+.workspace .flashcard-front {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(99, 102, 241, 0.10),
+      rgba(168, 85, 247, 0.045)
+    );
+}
+
+
+/* ============================================================
+   FLASHCARD BACK
+   ============================================================ */
+
+.workspace .flashcard-back {
+  transform:
+    rotateY(180deg);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(74, 222, 128, 0.08),
+      rgba(99, 102, 241, 0.05)
+    );
+
+  border-color:
+    rgba(134, 239, 172, 0.18);
+}
+
+
+/* ============================================================
+   FLASHCARD HOVER
+   ============================================================ */
+
+.workspace .flashcard-wrapper:hover
+.flashcard-face {
+  border-color:
+    rgba(129, 140, 248, 0.35);
+
+  box-shadow:
+    0 20px 45px
+    rgba(99, 102, 241, 0.13);
+}
+
+.workspace .flashcard-wrapper:focus-visible
+.flashcard-face {
+  border-color:
+    rgba(129, 140, 248, 0.55);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(99, 102, 241, 0.12);
+}
+
+
+/* ============================================================
+   FLASHCARD TOP
+   ============================================================ */
+
+.workspace .flashcard-top {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 20px;
+}
+
+
+/* NUMBER */
+
+.workspace .flashcard-number {
+  width: 29px;
+
+  height: 29px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 8px;
+
+  background:
+    rgba(129, 140, 248, 0.15);
+
+  border:
+    1px solid
+    rgba(129, 140, 248, 0.15);
+
+  color: #a5b4fc;
+
+  font-size: 11px;
+
+  font-weight: 800;
+}
+
+
+/* SIDE LABEL */
+
+.workspace .flashcard-side-label {
+  color: #7f879b;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+
+/* ============================================================
+   FLASHCARD QUESTION
+   ============================================================ */
+
+.workspace .flashcard-question {
+  flex: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  color: #f1f5f9;
+
+  font-size: 14px;
+
+  font-weight: 650;
+
+  line-height: 1.65;
+}
+
+
+/* ============================================================
+   FLASHCARD ANSWER
+   ============================================================ */
+
+.workspace .flashcard-answer {
+  flex: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  color: #c5f7d3;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+/* ============================================================
+   FLASHCARD FLIP HINT
+   ============================================================ */
+
+.workspace .flashcard-flip-hint {
+  margin-top: auto;
+
+  padding-top: 15px;
+
+  color: #6f7890;
+
+  font-size: 9px;
+
+  text-align: center;
+}
+
+
+/* ============================================================
+   QUIZ HINT
+   ============================================================ */
+
+.workspace .quiz-hint {
+  margin: -8px 0 17px;
+  color: #7f879b;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+
+.workspace .quiz-generated-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+/* ============================================================
+   QUIZ ITEM
+   ============================================================ */
+
+.workspace .generated-quiz-item {
+  width: 100%;
+  padding: 18px;
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.018)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.workspace .generated-quiz-item:hover {
+  border-color: rgba(129, 140, 248, 0.22);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(99, 102, 241, 0.065),
+      rgba(255, 255, 255, 0.025)
+    );
+}
+
+
+/* ============================================================
+   QUIZ QUESTION
+   ============================================================ */
+
+.workspace .quiz-question {
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  color: #f1f5f9;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  line-height: 1.6;
+}
+
+
+/* QUESTION NUMBER */
+
+.workspace .quiz-question > span {
+  width: 28px;
+  height: 28px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background:
+    rgba(129, 140, 248, 0.14);
+
+  border:
+    1px solid rgba(129, 140, 248, 0.12);
+
+  color: #a5b4fc;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+/* ============================================================
+   QUIZ OPTIONS
+   ============================================================ */
+
+.workspace .quiz-options {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-top: 15px;
+}
+
+
+/* OPTION BUTTON */
+
+.workspace .quiz-option {
+  width: 100%;
+  min-height: 46px;
+
+  padding: 10px 12px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.065);
+
+  color: #bfc6d5;
+
+  font-family: inherit;
+
+  font-size: 12px;
+  line-height: 1.45;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* OPTION LETTER */
+
+.workspace .quiz-option > span:first-child {
+  width: 25px;
+  height: 25px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 7px;
+
+  background:
+    rgba(129, 140, 248, 0.09);
+
+  color: #9aa3bb;
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+
+/* OPTION TEXT */
+
+.workspace .quiz-option-text {
+  flex: 1;
+  min-width: 0;
+
+  color: inherit;
+}
+
+
+/* ============================================================
+   QUIZ OPTION HOVER
+   ============================================================ */
+
+.workspace .quiz-option:hover:not(:disabled) {
+  background:
+    rgba(99, 102, 241, 0.10);
+
+  border-color:
+    rgba(129, 140, 248, 0.32);
+
+  color: #f1f5f9;
+
+  transform: translateX(3px);
+}
+
+
+/* ============================================================
+   SELECTED CORRECT
+   ============================================================ */
+
+.workspace .quiz-option.selected-correct {
+  background:
+    rgba(34, 197, 94, 0.10);
+
+  border-color:
+    rgba(74, 222, 128, 0.35);
+
+  color: #bbf7d0;
+}
+
+.workspace .quiz-option.selected-correct
+> span:first-child {
+  background:
+    rgba(74, 222, 128, 0.15);
+
+  color: #86efac;
+}
+
+
+/* ============================================================
+   SELECTED WRONG
+   ============================================================ */
+
+.workspace .quiz-option.selected-wrong {
+  background:
+    rgba(239, 68, 68, 0.10);
+
+  border-color:
+    rgba(248, 113, 113, 0.35);
+
+  color: #fecaca;
+}
+
+.workspace .quiz-option.selected-wrong
+> span:first-child {
+  background:
+    rgba(239, 68, 68, 0.15);
+
+  color: #fca5a5;
+}
+
+
+/* ============================================================
+   DISABLED OPTIONS
+   ============================================================ */
+
+.workspace .quiz-option.quiz-disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.workspace .quiz-option.quiz-disabled:hover {
+  transform: none;
+}
+
+.workspace .quiz-option.selected-correct.quiz-disabled,
+.workspace .quiz-option.selected-wrong.quiz-disabled {
+  opacity: 1;
+}
+
+
+/* ============================================================
+   QUIZ FEEDBACK
+   ============================================================ */
+
+.workspace .quiz-feedback {
+  margin-top: 14px;
+
+  padding: 12px 14px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  border-radius: 10px;
+
+  font-size: 11px;
+
+  animation:
+    quizFeedbackIn
+    0.25s ease;
+}
+
+.workspace .quiz-feedback > span {
+  width: 23px;
+  height: 23px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.workspace .quiz-feedback strong {
+  font-size: 11px;
+}
+
+.workspace .quiz-feedback small {
+  margin-left: auto;
+
+  color: inherit;
+
+  opacity: 0.65;
+
+  font-size: 9px;
+}
+
+
+/* ============================================================
+   CORRECT FEEDBACK
+   ============================================================ */
+
+.workspace .feedback-correct {
+  background:
+    rgba(34, 197, 94, 0.08);
+
+  border:
+    1px solid rgba(74, 222, 128, 0.18);
+
+  color: #86efac;
+}
+
+.workspace .feedback-correct > span {
+  background:
+    rgba(74, 222, 128, 0.13);
+}
+
+
+/* ============================================================
+   WRONG FEEDBACK
+   ============================================================ */
+
+.workspace .feedback-wrong {
+  background:
+    rgba(239, 68, 68, 0.08);
+
+  border:
+    1px solid rgba(248, 113, 113, 0.18);
+
+  color: #fca5a5;
+}
+
+.workspace .feedback-wrong > span {
+  background:
+    rgba(248, 113, 113, 0.13);
+}
+
+
+/* ============================================================
+   QUIZ COMPLETED CARD
+   ============================================================ */
+
+.workspace .generated-quiz-item.quiz-completed-correct {
+  border-color:
+    rgba(74, 222, 128, 0.15);
+}
+
+.workspace .generated-quiz-item.quiz-completed-wrong {
+  border-color:
+    rgba(248, 113, 113, 0.15);
+}
+
+
+/* ============================================================
+   FEEDBACK ANIMATION
+   ============================================================ */
+
+@keyframes quizFeedbackIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   MINDMAP
+   ============================================================ */
+
+.workspace .mindmap-container {
+  padding: 20px;
+
+  overflow-x: auto;
+
+  border-radius: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+.workspace .mindmap-root {
+  width: fit-content;
+
+  margin: 0 auto 28px;
+
+  padding: 12px 20px;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.22),
+      rgba(139, 92, 246, 0.16)
+    );
+
+  border:
+    1px solid rgba(129, 140, 248, 0.3);
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  text-align: center;
+}
+
+.workspace .mindmap-main {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(180px, 1fr)
+    );
+
+  gap: 14px;
+}
+
+.workspace .mindmap-main-branch {
+  min-width: 0;
+}
+
+.workspace .mindmap-node {
+  padding: 11px;
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+}
+
+.workspace .mindmap-node-title {
+  color: #cdd4ff;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  line-height: 1.45;
+}
+
+.workspace .mindmap-children {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+  margin-top: 9px;
+
+  padding-left: 10px;
+
+  border-left:
+    1px solid rgba(129, 140, 248, 0.2);
+}
+
+.workspace .mindmap-node.level-1 {
+  background:
+    rgba(99, 102, 241, 0.06);
+}
+
+.workspace .mindmap-node.level-2 {
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+
+/* ============================================================
+   PDF OVERLAY
+   ============================================================ */
+
+.workspace .pdf-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 99999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(3, 5, 12, 0.78);
+
+  backdrop-filter: blur(8px);
+}
+
+.workspace .pdf-viewer {
+  width: min(1100px, 96vw);
+
+  height: min(850px, 94vh);
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  background: #101525;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.6);
+}
+
+.workspace .pdf-viewer-header {
+  width: 100%;
+
+  height: 60px;
+
+  min-height: 60px;
+
+  padding: 0 17px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  background:
+    rgba(7, 11, 22, 0.95);
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.07);
+}
+
+.workspace .pdf-title {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #f1f5f9;
+}
+
+.workspace .pdf-title div {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.workspace .pdf-title strong {
+  max-width: 600px;
+
+  color: #f1f5f9;
+
+  font-size: 12px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.workspace .pdf-title span {
+  color: #7f879b;
+
+  font-size: 10px;
+}
+
+.workspace .pdf-close {
+  width: 32px;
+  height: 32px;
+
+  flex-shrink: 0;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 8px;
+
+  background:
+    rgba(255, 255, 255, 0.05);
+
+  color: #c5cada;
+
+  cursor: pointer;
+}
+
+.workspace .pdf-close:hover {
+  background:
+    rgba(129, 140, 248, 0.14);
+
+  border-color:
+    rgba(129, 140, 248, 0.3);
+
+  color: #ffffff;
+}
+
+.workspace .pdf-viewer-body {
+  position: relative;
+
+  flex: 1;
+
+  min-height: 0;
+
+  background: #252936;
+}
+
+.workspace .pdf-frame {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  border: none;
+}
+
+.workspace .pdf-loading {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #252936;
+
+  color: #ffffff;
+
+  font-size: 13px;
+}
+
+
+/* ============================================================
+   SCROLLBARS
+   ============================================================ */
+
+.workspace .sources-panel::-webkit-scrollbar,
+.workspace .studio-panel::-webkit-scrollbar,
+.workspace .chat-content::-webkit-scrollbar,
+.workspace .mindmap-container::-webkit-scrollbar {
+  width: 7px;
+
+  height: 7px;
+}
+
+.workspace .sources-panel::-webkit-scrollbar-thumb,
+.workspace .studio-panel::-webkit-scrollbar-thumb,
+.workspace .chat-content::-webkit-scrollbar-thumb,
+.workspace .mindmap-container::-webkit-scrollbar-thumb {
+  background:
+    rgba(129, 140, 248, 0.3);
+
+  border-radius: 10px;
+}
+
+.workspace .sources-panel::-webkit-scrollbar-thumb:hover,
+.workspace .studio-panel::-webkit-scrollbar-thumb:hover,
+.workspace .chat-content::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(129, 140, 248, 0.5);
+}
+
+.workspace .sources-panel::-webkit-scrollbar-track,
+.workspace .studio-panel::-webkit-scrollbar-track,
+.workspace .chat-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+  .workspace .workspace-grid {
+    grid-template-columns:
+      245px
+      minmax(0, 1fr)
+      290px;
+  }
+
+  .workspace .chat-content {
+    padding: 24px;
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .workspace .workspace-grid {
+    grid-template-columns:
+      210px
+      minmax(0, 1fr)
+      250px;
+  }
+
+  .workspace .workspace-header {
+    gap: 12px;
+    padding: 0 14px;
+  }
+
+  .workspace .workspace-actions {
+    gap: 5px;
+  }
+
+  .workspace .workspace-actions button {
+    padding: 8px 9px;
+  }
+
+}
+
+
+@media (max-width: 720px) {
+
+  .workspace .workspace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace .sources-panel,
+  .workspace .studio-panel {
+    display: none;
+  }
+
+  .workspace .workspace-lecture {
+    display: none;
+  }
+
+  .workspace .chat-content {
+    padding: 20px 14px;
+  }
+
+  .workspace .generated-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .workspace .workspace-header {
+    height: 65px;
+
+    min-height: 65px;
+
+    padding: 0 10px;
+  }
+
+  .workspace .workspace-grid {
+    height: calc(100vh - 65px);
+  }
+
+  .workspace .workspace-brand {
+    font-size: 15px;
+  }
+
+  .workspace .workspace-actions button {
+    padding: 6px 8px;
+
+    font-size: 9px;
+  }
+
+  .workspace .chat-content {
+    padding: 18px 14px;
+  }
+
+  .workspace .chat-welcome h1.workspace-chat-title {
+    font-size: 23px;
+  }
+
+  .workspace .chat-input-area {
+    width: calc(100% - 20px);
+
+    margin: 0 10px;
+  }
+
+  .workspace .pdf-overlay {
+    padding: 5px;
+  }
+
+  .workspace .pdf-viewer {
+    width: 100%;
+
+    height: 98vh;
+
+    border-radius: 10px;
+  }
+
+}
+/* =========================================================
+   QUIZ - TWO ATTEMPTS
+   ========================================================= */
+
+.quiz-attempt-counter {
+  margin: 8px 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #777;
+  letter-spacing: 0.02em;
+}
+
+.quiz-option {
+  position: relative;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.quiz-option:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.quiz-option.selected-wrong {
+  border-color: #e57373 !important;
+  background: #fff4f4 !important;
+}
+
+.quiz-option.selected-correct {
+  border-color: #67b587 !important;
+  background: #f1fff6 !important;
+}
+
+.quiz-option.revealed-correct {
+  border-color: #4caf79 !important;
+  background: #ecfff3 !important;
+  box-shadow: 0 0 0 2px rgba(76, 175, 121, 0.12);
+}
+
+.correct-answer-check {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+  color: #29945b;
+}
+
+.quiz-feedback {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 13px 16px;
+  border-radius: 12px;
+}
+
+.quiz-feedback > span {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 900;
+}
+
+.quiz-feedback > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.quiz-feedback strong {
+  font-size: 14px;
+}
+
+.quiz-feedback small {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.feedback-correct {
+  background: #effbf4;
+  border: 1px solid #bce8cc;
+  color: #26764a;
+}
+
+.feedback-correct > span {
+  background: #42a96d;
+  color: white;
+}
+
+.feedback-wrong {
+  background: #fff5f5;
+  border: 1px solid #f0c5c5;
+  color: #a34242;
+}
+
+.feedback-wrong > span {
+  background: #df6969;
+  color: white;
+}
+
+.retry-feedback {
+  background: #fff9ed;
+  border-color: #f0d49c;
+  color: #966b1d;
+}
+
+.retry-feedback > span {
+  background: #e5a93d;
+  color: white;
+}
+
+
+/* =========================================================
+   MINDMAP - TREE VIEW
+   ========================================================= */
+
+.mindmap-hint {
+  margin: -4px 0 18px;
+  color: #777;
+  font-size: 13px;
+}
+
+.mindmap-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 30px 20px 45px;
+  border-radius: 18px;
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(120, 95, 180, 0.05),
+      transparent 30%
+    ),
+    #faf9fd;
+  border: 1px solid rgba(100, 80, 140, 0.1);
+}
+
+/* Main tree */
+
+.mindmap-tree {
+  min-width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
+.mindmap-root-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+}
+
+.mindmap-root-card {
+  min-width: 220px;
+  max-width: 340px;
+  padding: 16px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #6d5bb3,
+    #8975cf
+  );
+
+  color: white;
+
+  box-shadow:
+    0 10px 28px rgba(93, 75, 150, 0.25);
+
+  text-align: center;
+}
+
+.mindmap-root-card span {
+  font-size: 20px;
+}
+
+.mindmap-root-card strong {
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+
+/* =========================================================
+   ROOT → MAIN BRANCH LINE
+   ========================================================= */
+
+.mindmap-root-line {
+  width: 2px;
+  height: 30px;
+  background: #b9b0ce;
+  position: relative;
+}
+
+.mindmap-root-line::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid #b9b0ce;
+  border-bottom: 2px solid #b9b0ce;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+
+/* =========================================================
+   MAIN BRANCH CONTAINER
+   ========================================================= */
+
+.mindmap-branches {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  position: relative;
+  padding-top: 28px;
+}
+
+/*
+  Horizontal connector joining all main branches.
+*/
+
+.mindmap-branches::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: #b9b0ce;
+}
+
+
+/* =========================================================
+   MAIN BRANCH
+   ========================================================= */
+
+.mindmap-main-branch {
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/*
+  Vertical line from horizontal branch line
+  down to each branch.
+*/
+
+.mindmap-branch-line {
+  width: 2px;
+  height: 28px;
+  background: #b9b0ce;
+  margin-top: -28px;
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   TREE NODE
+   ========================================================= */
+
+.mindmap-tree-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.mindmap-node-card {
+  min-width: 170px;
+  max-width: 240px;
+
+  padding: 12px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  border-radius: 13px;
+
+  background: white;
+
+  border: 1px solid #ddd7e8;
+
+  box-shadow:
+    0 5px 16px rgba(70, 55, 100, 0.08);
+
+  text-align: center;
+
+  position: relative;
+  z-index: 2;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.mindmap-node-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 22px rgba(70, 55, 100, 0.13);
+}
+
+.mindmap-node-dot {
+  font-size: 9px;
+  color: #806bbd;
+  flex-shrink: 0;
+}
+
+.mindmap-node-title {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #3f394b;
+}
+
+
+/* =========================================================
+   CHILDREN
+   ========================================================= */
+
+.mindmap-children {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  gap: 18px;
+
+  position: relative;
+
+  margin-top: 28px;
+  padding-top: 0;
+}
+
+/*
+  Horizontal line joining children.
+*/
+
+.mindmap-children::before {
+  content: "";
+  position: absolute;
+
+  top: 0;
+
+  left: 12%;
+  right: 12%;
+
+  height: 2px;
+
+  background: #c9c2d6;
+}
+
+
+/* =========================================================
+   CHILD NODE
+   ========================================================= */
+
+.mindmap-child {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-width: 145px;
+}
+
+/*
+  Vertical connector from
+  horizontal line → child.
+*/
+
+.mindmap-child::before {
+  content: "";
+
+  position: absolute;
+
+  top: -28px;
+
+  left: 50%;
+
+  width: 2px;
+  height: 28px;
+
+  background: #c9c2d6;
+}
+
+.mindmap-horizontal-line {
+  display: none;
+}
+
+
+/* =========================================================
+   DEEPER LEVELS
+   ========================================================= */
+
+.mindmap-tree-node .mindmap-tree-node {
+  margin-top: 0;
+}
+
+.mindmap-tree-node .mindmap-tree-node .mindmap-node-card {
+  background: #fcfbff;
+  border-color: #e3ddec;
+}
+
+.mindmap-tree-node
+  .mindmap-tree-node
+  .mindmap-tree-node
+  .mindmap-node-card {
+  background: #ffffff;
+  border-color: #e8e4ed;
+}
+
+.mindmap-tree-node
+  .mindmap-tree-node
+  .mindmap-tree-node
+  .mindmap-tree-node
+  .mindmap-node-card {
+  background: #fafafa;
+}
+
+
+/* =========================================================
+   MINDMAP SCROLLBAR
+   ========================================================= */
+
+.mindmap-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.mindmap-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mindmap-scroll::-webkit-scrollbar-thumb {
+  background: #c7bfd4;
+  border-radius: 10px;
+}
+
+.mindmap-scroll::-webkit-scrollbar-thumb:hover {
+  background: #aaa0bb;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .mindmap-scroll {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .mindmap-branches {
+    gap: 14px;
+  }
+
+  .mindmap-root-card {
+    min-width: 190px;
+  }
+
+  .mindmap-node-card {
+    min-width: 145px;
+    max-width: 200px;
+    padding: 10px 12px;
+  }
+
+  .mindmap-node-title {
+    font-size: 12px;
+  }
+
+}
